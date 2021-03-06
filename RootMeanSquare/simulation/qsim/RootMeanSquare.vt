@@ -1,0 +1,743 @@
+// Copyright (C) 1991-2013 Altera Corporation
+// Your use of Altera Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Altera Program License 
+// Subscription Agreement, Altera MegaCore Function License 
+// Agreement, or other applicable license agreement, including, 
+// without limitation, that your use is for the sole purpose of 
+// programming logic devices manufactured by Altera and sold by 
+// Altera or its authorized distributors.  Please refer to the 
+// applicable agreement for further details.
+
+// *****************************************************************************
+// This file contains a Verilog test bench with test vectors .The test vectors  
+// are exported from a vector file in the Quartus Waveform Editor and apply to  
+// the top level entity of the current Quartus project .The user can use this   
+// testbench to simulate his design using a third-party simulation tool .       
+// *****************************************************************************
+// Generated on "03/06/2021 18:52:54"
+                                                                        
+// Verilog Self-Checking Test Bench (with test vectors) for design :    RootMeanSquare
+// 
+// Simulation tool : 3rd Party
+// 
+
+`timescale 1 ps/ 1 ps
+module RootMeanSquare_vlg_sample_tst(
+	clock,
+	sampler_tx
+);
+input  clock;
+output sampler_tx;
+
+reg sample;
+time current_time;
+always @(clock)
+                                                                                
+begin                                                 
+ if ($realtime > 0)                                   
+ begin                                                
+	if ($realtime == 0 || $realtime != current_time)  
+	begin									          
+		if (sample === 1'bx)                          
+			sample = 0;                               
+		else                                          
+			sample = ~sample;                         
+	end										          
+	current_time = $realtime;					      
+ end                                                  
+end                                                   
+
+assign sampler_tx = sample;
+endmodule
+
+module RootMeanSquare_vlg_check_tst (
+	squared,
+	sampler_rx
+);
+input [31:0] squared;
+input sampler_rx;
+
+reg [31:0] squared_expected;
+
+reg [31:0] squared_prev;
+
+reg [31:0] squared_expected_prev;
+
+reg [31:0] last_squared_exp;
+
+reg trigger;
+
+integer i;
+integer nummismatches;
+
+reg [1:1] on_first_change ;
+
+
+initial
+begin
+trigger = 0;
+i = 0;
+nummismatches = 0;
+on_first_change = 1'b1;
+end
+
+// update real /o prevs
+
+always @(trigger)
+begin
+	squared_prev = squared;
+end
+
+// update expected /o prevs
+
+always @(trigger)
+begin
+	squared_expected_prev = squared_expected;
+end
+
+
+// expected squared[ 31 ]
+initial
+begin
+	squared_expected[31] = 1'bX;
+end 
+// expected squared[ 30 ]
+initial
+begin
+	squared_expected[30] = 1'bX;
+end 
+// expected squared[ 29 ]
+initial
+begin
+	squared_expected[29] = 1'bX;
+end 
+// expected squared[ 28 ]
+initial
+begin
+	squared_expected[28] = 1'bX;
+end 
+// expected squared[ 27 ]
+initial
+begin
+	squared_expected[27] = 1'bX;
+end 
+// expected squared[ 26 ]
+initial
+begin
+	squared_expected[26] = 1'bX;
+end 
+// expected squared[ 25 ]
+initial
+begin
+	squared_expected[25] = 1'bX;
+end 
+// expected squared[ 24 ]
+initial
+begin
+	squared_expected[24] = 1'bX;
+end 
+// expected squared[ 23 ]
+initial
+begin
+	squared_expected[23] = 1'bX;
+end 
+// expected squared[ 22 ]
+initial
+begin
+	squared_expected[22] = 1'bX;
+end 
+// expected squared[ 21 ]
+initial
+begin
+	squared_expected[21] = 1'bX;
+end 
+// expected squared[ 20 ]
+initial
+begin
+	squared_expected[20] = 1'bX;
+end 
+// expected squared[ 19 ]
+initial
+begin
+	squared_expected[19] = 1'bX;
+end 
+// expected squared[ 18 ]
+initial
+begin
+	squared_expected[18] = 1'bX;
+end 
+// expected squared[ 17 ]
+initial
+begin
+	squared_expected[17] = 1'bX;
+end 
+// expected squared[ 16 ]
+initial
+begin
+	squared_expected[16] = 1'bX;
+end 
+// expected squared[ 15 ]
+initial
+begin
+	squared_expected[15] = 1'bX;
+end 
+// expected squared[ 14 ]
+initial
+begin
+	squared_expected[14] = 1'bX;
+end 
+// expected squared[ 13 ]
+initial
+begin
+	squared_expected[13] = 1'bX;
+end 
+// expected squared[ 12 ]
+initial
+begin
+	squared_expected[12] = 1'bX;
+end 
+// expected squared[ 11 ]
+initial
+begin
+	squared_expected[11] = 1'bX;
+end 
+// expected squared[ 10 ]
+initial
+begin
+	squared_expected[10] = 1'bX;
+end 
+// expected squared[ 9 ]
+initial
+begin
+	squared_expected[9] = 1'bX;
+end 
+// expected squared[ 8 ]
+initial
+begin
+	squared_expected[8] = 1'bX;
+end 
+// expected squared[ 7 ]
+initial
+begin
+	squared_expected[7] = 1'bX;
+end 
+// expected squared[ 6 ]
+initial
+begin
+	squared_expected[6] = 1'bX;
+end 
+// expected squared[ 5 ]
+initial
+begin
+	squared_expected[5] = 1'bX;
+end 
+// expected squared[ 4 ]
+initial
+begin
+	squared_expected[4] = 1'bX;
+end 
+// expected squared[ 3 ]
+initial
+begin
+	squared_expected[3] = 1'bX;
+end 
+// expected squared[ 2 ]
+initial
+begin
+	squared_expected[2] = 1'bX;
+end 
+// expected squared[ 1 ]
+initial
+begin
+	squared_expected[1] = 1'bX;
+end 
+// expected squared[ 0 ]
+initial
+begin
+	squared_expected[0] = 1'bX;
+end 
+// generate trigger
+always @(squared_expected or squared)
+begin
+	trigger <= ~trigger;
+end
+
+always @(posedge sampler_rx or negedge sampler_rx)
+begin
+`ifdef debug_tbench
+	$display("Scanning pattern %d @time = %t",i,$realtime );
+	i = i + 1;
+	$display("| expected squared = %b | ",squared_expected_prev);
+	$display("| real squared = %b | ",squared_prev);
+`endif
+	if (
+		( squared_expected_prev[0] !== 1'bx ) && ( squared_prev[0] !== squared_expected_prev[0] )
+		&& ((squared_expected_prev[0] !== last_squared_exp[0]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[0] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[0] = squared_expected_prev[0];
+	end
+	if (
+		( squared_expected_prev[1] !== 1'bx ) && ( squared_prev[1] !== squared_expected_prev[1] )
+		&& ((squared_expected_prev[1] !== last_squared_exp[1]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[1] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[1] = squared_expected_prev[1];
+	end
+	if (
+		( squared_expected_prev[2] !== 1'bx ) && ( squared_prev[2] !== squared_expected_prev[2] )
+		&& ((squared_expected_prev[2] !== last_squared_exp[2]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[2] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[2] = squared_expected_prev[2];
+	end
+	if (
+		( squared_expected_prev[3] !== 1'bx ) && ( squared_prev[3] !== squared_expected_prev[3] )
+		&& ((squared_expected_prev[3] !== last_squared_exp[3]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[3] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[3] = squared_expected_prev[3];
+	end
+	if (
+		( squared_expected_prev[4] !== 1'bx ) && ( squared_prev[4] !== squared_expected_prev[4] )
+		&& ((squared_expected_prev[4] !== last_squared_exp[4]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[4] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[4] = squared_expected_prev[4];
+	end
+	if (
+		( squared_expected_prev[5] !== 1'bx ) && ( squared_prev[5] !== squared_expected_prev[5] )
+		&& ((squared_expected_prev[5] !== last_squared_exp[5]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[5] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[5] = squared_expected_prev[5];
+	end
+	if (
+		( squared_expected_prev[6] !== 1'bx ) && ( squared_prev[6] !== squared_expected_prev[6] )
+		&& ((squared_expected_prev[6] !== last_squared_exp[6]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[6] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[6] = squared_expected_prev[6];
+	end
+	if (
+		( squared_expected_prev[7] !== 1'bx ) && ( squared_prev[7] !== squared_expected_prev[7] )
+		&& ((squared_expected_prev[7] !== last_squared_exp[7]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[7] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[7] = squared_expected_prev[7];
+	end
+	if (
+		( squared_expected_prev[8] !== 1'bx ) && ( squared_prev[8] !== squared_expected_prev[8] )
+		&& ((squared_expected_prev[8] !== last_squared_exp[8]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[8] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[8] = squared_expected_prev[8];
+	end
+	if (
+		( squared_expected_prev[9] !== 1'bx ) && ( squared_prev[9] !== squared_expected_prev[9] )
+		&& ((squared_expected_prev[9] !== last_squared_exp[9]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[9] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[9] = squared_expected_prev[9];
+	end
+	if (
+		( squared_expected_prev[10] !== 1'bx ) && ( squared_prev[10] !== squared_expected_prev[10] )
+		&& ((squared_expected_prev[10] !== last_squared_exp[10]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[10] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[10] = squared_expected_prev[10];
+	end
+	if (
+		( squared_expected_prev[11] !== 1'bx ) && ( squared_prev[11] !== squared_expected_prev[11] )
+		&& ((squared_expected_prev[11] !== last_squared_exp[11]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[11] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[11] = squared_expected_prev[11];
+	end
+	if (
+		( squared_expected_prev[12] !== 1'bx ) && ( squared_prev[12] !== squared_expected_prev[12] )
+		&& ((squared_expected_prev[12] !== last_squared_exp[12]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[12] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[12] = squared_expected_prev[12];
+	end
+	if (
+		( squared_expected_prev[13] !== 1'bx ) && ( squared_prev[13] !== squared_expected_prev[13] )
+		&& ((squared_expected_prev[13] !== last_squared_exp[13]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[13] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[13] = squared_expected_prev[13];
+	end
+	if (
+		( squared_expected_prev[14] !== 1'bx ) && ( squared_prev[14] !== squared_expected_prev[14] )
+		&& ((squared_expected_prev[14] !== last_squared_exp[14]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[14] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[14] = squared_expected_prev[14];
+	end
+	if (
+		( squared_expected_prev[15] !== 1'bx ) && ( squared_prev[15] !== squared_expected_prev[15] )
+		&& ((squared_expected_prev[15] !== last_squared_exp[15]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[15] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[15] = squared_expected_prev[15];
+	end
+	if (
+		( squared_expected_prev[16] !== 1'bx ) && ( squared_prev[16] !== squared_expected_prev[16] )
+		&& ((squared_expected_prev[16] !== last_squared_exp[16]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[16] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[16] = squared_expected_prev[16];
+	end
+	if (
+		( squared_expected_prev[17] !== 1'bx ) && ( squared_prev[17] !== squared_expected_prev[17] )
+		&& ((squared_expected_prev[17] !== last_squared_exp[17]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[17] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[17] = squared_expected_prev[17];
+	end
+	if (
+		( squared_expected_prev[18] !== 1'bx ) && ( squared_prev[18] !== squared_expected_prev[18] )
+		&& ((squared_expected_prev[18] !== last_squared_exp[18]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[18] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[18] = squared_expected_prev[18];
+	end
+	if (
+		( squared_expected_prev[19] !== 1'bx ) && ( squared_prev[19] !== squared_expected_prev[19] )
+		&& ((squared_expected_prev[19] !== last_squared_exp[19]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[19] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[19] = squared_expected_prev[19];
+	end
+	if (
+		( squared_expected_prev[20] !== 1'bx ) && ( squared_prev[20] !== squared_expected_prev[20] )
+		&& ((squared_expected_prev[20] !== last_squared_exp[20]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[20] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[20] = squared_expected_prev[20];
+	end
+	if (
+		( squared_expected_prev[21] !== 1'bx ) && ( squared_prev[21] !== squared_expected_prev[21] )
+		&& ((squared_expected_prev[21] !== last_squared_exp[21]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[21] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[21] = squared_expected_prev[21];
+	end
+	if (
+		( squared_expected_prev[22] !== 1'bx ) && ( squared_prev[22] !== squared_expected_prev[22] )
+		&& ((squared_expected_prev[22] !== last_squared_exp[22]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[22] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[22] = squared_expected_prev[22];
+	end
+	if (
+		( squared_expected_prev[23] !== 1'bx ) && ( squared_prev[23] !== squared_expected_prev[23] )
+		&& ((squared_expected_prev[23] !== last_squared_exp[23]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[23] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[23] = squared_expected_prev[23];
+	end
+	if (
+		( squared_expected_prev[24] !== 1'bx ) && ( squared_prev[24] !== squared_expected_prev[24] )
+		&& ((squared_expected_prev[24] !== last_squared_exp[24]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[24] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[24] = squared_expected_prev[24];
+	end
+	if (
+		( squared_expected_prev[25] !== 1'bx ) && ( squared_prev[25] !== squared_expected_prev[25] )
+		&& ((squared_expected_prev[25] !== last_squared_exp[25]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[25] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[25] = squared_expected_prev[25];
+	end
+	if (
+		( squared_expected_prev[26] !== 1'bx ) && ( squared_prev[26] !== squared_expected_prev[26] )
+		&& ((squared_expected_prev[26] !== last_squared_exp[26]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[26] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[26] = squared_expected_prev[26];
+	end
+	if (
+		( squared_expected_prev[27] !== 1'bx ) && ( squared_prev[27] !== squared_expected_prev[27] )
+		&& ((squared_expected_prev[27] !== last_squared_exp[27]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[27] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[27] = squared_expected_prev[27];
+	end
+	if (
+		( squared_expected_prev[28] !== 1'bx ) && ( squared_prev[28] !== squared_expected_prev[28] )
+		&& ((squared_expected_prev[28] !== last_squared_exp[28]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[28] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[28] = squared_expected_prev[28];
+	end
+	if (
+		( squared_expected_prev[29] !== 1'bx ) && ( squared_prev[29] !== squared_expected_prev[29] )
+		&& ((squared_expected_prev[29] !== last_squared_exp[29]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[29] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[29] = squared_expected_prev[29];
+	end
+	if (
+		( squared_expected_prev[30] !== 1'bx ) && ( squared_prev[30] !== squared_expected_prev[30] )
+		&& ((squared_expected_prev[30] !== last_squared_exp[30]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[30] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[30] = squared_expected_prev[30];
+	end
+	if (
+		( squared_expected_prev[31] !== 1'bx ) && ( squared_prev[31] !== squared_expected_prev[31] )
+		&& ((squared_expected_prev[31] !== last_squared_exp[31]) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port squared[31] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", squared_expected_prev);
+		$display ("     Real value = %b", squared_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_squared_exp[31] = squared_expected_prev[31];
+	end
+
+	trigger <= ~trigger;
+end
+initial 
+
+begin 
+$timeformat(-12,3," ps",6);
+#1000000;
+if (nummismatches > 0)
+	$display ("%d mismatched vectors : Simulation failed !",nummismatches);
+else
+	$display ("Simulation passed !");
+$finish;
+end 
+endmodule
+
+module RootMeanSquare_vlg_vec_tst();
+// constants                                           
+// general purpose registers
+reg clock;
+// wires                                               
+wire [31:0] squared;
+
+wire sampler;                             
+
+// assign statements (if any)                          
+RootMeanSquare i1 (
+// port map - connection between master ports and signals/registers   
+	.clock(clock),
+	.squared(squared)
+);
+
+// clock
+always
+begin
+	clock = 1'b0;
+	clock = #5000 1'b1;
+	#5000;
+end 
+
+RootMeanSquare_vlg_sample_tst tb_sample (
+	.clock(clock),
+	.sampler_tx(sampler)
+);
+
+RootMeanSquare_vlg_check_tst tb_out(
+	.squared(squared),
+	.sampler_rx(sampler)
+);
+endmodule
+

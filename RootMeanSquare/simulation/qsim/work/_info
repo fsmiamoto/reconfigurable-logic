@@ -1,0 +1,85 @@
+m255
+K3
+13
+cModel Technology
+Z0 d\\TRUENAS\shigueo\Lógica Reconfigurável\RootMeanSquare\simulation\qsim
+vRootMeanSquare
+Z1 !s100 ni]OD40V0CR:@7@E9J:392
+Z2 I5NVO?5^I0`m^VU4bNFW3^2
+Z3 V_SMXB=RS_?BgJFk[XA>9P1
+Z4 d\\TRUENAS\shigueo\Lógica Reconfigurável\RootMeanSquare\simulation\qsim
+Z5 w1615067572
+Z6 8RootMeanSquare.vo
+Z7 FRootMeanSquare.vo
+L0 31
+Z8 OV;L;10.1d;51
+r1
+31
+Z9 !s90 -work|work|RootMeanSquare.vo|
+Z10 o-work work -O0
+Z11 n@root@mean@square
+!i10b 1
+!s85 0
+Z12 !s108 1615067576.364000
+Z13 !s107 RootMeanSquare.vo|
+!s101 -O0
+vRootMeanSquare_vlg_check_tst
+!i10b 1
+Z14 !s100 gb_QC6`^U6A2mS:Q=CLle3
+Z15 IO?VEjA?<V3XmlcjIS6][U3
+Z16 VmBanYiFLeJBe0lF^>c<SX2
+R4
+Z17 w1615067571
+Z18 8RootMeanSquare.vt
+Z19 FRootMeanSquare.vt
+L0 57
+R8
+r1
+!s85 0
+31
+Z20 !s108 1615067576.541000
+Z21 !s107 RootMeanSquare.vt|
+Z22 !s90 -work|work|RootMeanSquare.vt|
+!s101 -O0
+R10
+Z23 n@root@mean@square_vlg_check_tst
+vRootMeanSquare_vlg_sample_tst
+!i10b 1
+Z24 !s100 ajT1H9VYng8IB5[73_Lmb0
+Z25 IzODi3=@lOkeOlW86o:Q^L2
+Z26 VaNY]N0`Ej5T>dGRV:V]I<2
+R4
+R17
+R18
+R19
+L0 29
+R8
+r1
+!s85 0
+31
+R20
+R21
+R22
+!s101 -O0
+R10
+Z27 n@root@mean@square_vlg_sample_tst
+vRootMeanSquare_vlg_vec_tst
+!i10b 1
+Z28 !s100 PO8l<cLmj0^=7omofUFoW0
+Z29 IzdWgmmK460Ia6IGhK>U=^1
+Z30 VB4f>_NPUO6kO5^Nfz1RPN3
+R4
+R17
+R18
+R19
+Z31 L0 709
+R8
+r1
+!s85 0
+31
+R20
+R21
+R22
+!s101 -O0
+R10
+Z32 n@root@mean@square_vlg_vec_tst
