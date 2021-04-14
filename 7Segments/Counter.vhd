@@ -16,8 +16,6 @@
 --
 -- 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 -- ************************************************************
-
-
 --Copyright (C) 2020  Intel Corporation. All rights reserved.
 --Your use of Intel Corporation's design tools, logic functions 
 --and other software and tools, and any partner logic 
@@ -32,63 +30,59 @@
 --Intel and sold by Intel or its authorized distributors.  Please
 --refer to the applicable agreement for further details, at
 --https://fpgasoftware.intel.com/eula.
+library ieee;
+use ieee.std_logic_1164.all;
 
+library lpm;
+use lpm.all;
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
+entity Counter is
+  generic (
+    modulus : integer := 10
+  );
+  port (
+    clock : in std_logic;
+    sclr  : in std_logic;
+    q     : out std_logic_vector (4 downto 0)
+  );
+end Counter;
+architecture SYN of counter is
 
-LIBRARY lpm;
-USE lpm.all;
+  signal sub_wire0 : std_logic_vector (4 downto 0);
 
-ENTITY Counter IS
-	PORT
-	(
-		clock		: IN STD_LOGIC ;
-		sclr		: IN STD_LOGIC ;
-		q		: OUT STD_LOGIC_VECTOR (4 DOWNTO 0)
-	);
-END Counter;
+  component lpm_counter
+    generic (
+      lpm_direction   : string;
+      lpm_port_updown : string;
+      lpm_type        : string;
+      lpm_width       : natural;
+      lpm_modulus     : integer
+    );
+    port (
+      clock : in std_logic;
+      sclr  : in std_logic;
+      q     : out std_logic_vector (4 downto 0)
+    );
+  end component;
 
+begin
+  q <= sub_wire0(4 downto 0);
 
-ARCHITECTURE SYN OF counter IS
+  LPM_COUNTER_component : LPM_COUNTER
+  generic map(
+    lpm_direction   => "UP",
+    lpm_port_updown => "PORT_UNUSED",
+    lpm_type        => "LPM_COUNTER",
+    lpm_width       => 5,
+    lpm_modulus     => 10
+  )
+  port map(
+    clock => clock,
+    sclr  => sclr,
+    q     => sub_wire0
+  );
 
-	SIGNAL sub_wire0	: STD_LOGIC_VECTOR (4 DOWNTO 0);
-
-
-
-	COMPONENT lpm_counter
-	GENERIC (
-		lpm_direction		: STRING;
-		lpm_port_updown		: STRING;
-		lpm_type		: STRING;
-		lpm_width		: NATURAL
-	);
-	PORT (
-			clock	: IN STD_LOGIC ;
-			sclr	: IN STD_LOGIC ;
-			q	: OUT STD_LOGIC_VECTOR (4 DOWNTO 0)
-	);
-	END COMPONENT;
-
-BEGIN
-	q    <= sub_wire0(4 DOWNTO 0);
-
-	LPM_COUNTER_component : LPM_COUNTER
-	GENERIC MAP (
-		lpm_direction => "UP",
-		lpm_port_updown => "PORT_UNUSED",
-		lpm_type => "LPM_COUNTER",
-		lpm_width => 5
-	)
-	PORT MAP (
-		clock => clock,
-		sclr => sclr,
-		q => sub_wire0
-	);
-
-
-
-END SYN;
+end SYN;
 
 -- ============================================================
 -- CNX file retrieval info
