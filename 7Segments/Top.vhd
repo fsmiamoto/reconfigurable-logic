@@ -1,5 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity Top is
   port (
@@ -47,17 +48,37 @@ architecture rtl of Top is
     );
   end component;
 
-  signal encoded : std_logic_vector (3 downto 0);
-  signal decoded : std_logic_vector(6 downto 0);
+  signal encoded : std_logic_vector (15 downto 0);
+
+  signal decoded_0 : std_logic_vector(6 downto 0);
+  signal decoded_1 : std_logic_vector(6 downto 0);
+  signal decoded_2 : std_logic_vector(6 downto 0);
+  signal decoded_3 : std_logic_vector(6 downto 0);
+
+  signal active_display : integer range 0 to 3 := 0;
 
   signal reset_counter : std_logic := '0';
   signal rom_out       : std_logic_vector(3 downto 0);
   signal counter_out   : std_logic_vector(4 downto 0);
-  signal clock         : std_logic;
+
+  signal clock       : std_logic;
+  signal display_clk : std_logic;
 begin
-  dec : Decoder port map(
-    input  => rom_out,
-    output => decoded
+  dec0 : Decoder port map(
+    input  => encoded(3 downto 0),
+    output => decoded_0
+  );
+  dec1 : Decoder port map(
+    input  => encoded(7 downto 4),
+    output => decoded_1
+  );
+  dec2 : Decoder port map(
+    input  => encoded(11 downto 8),
+    output => decoded_2
+  );
+  dec3 : Decoder port map(
+    input  => encoded(15 downto 12),
+    output => decoded_3
   );
 
   mem : ROM port map(
@@ -84,7 +105,38 @@ begin
     clk_out => clock
   );
 
-  clk_out      <= clock;
-  data         <= decoded;
-  digit_enable <= (3 => '0', others => '1');
+  div2 : ClockDivider generic map(
+    divide_by => 25E2
+  )
+  port map(
+    clk_in  => clk,
+    clk_out => display_clk
+  );
+
+  clk_out <= clock;
+  encoded <= "1010111011011010";
+
+  process (display_clk)
+  begin
+    if (rising_edge(display_clk)) then
+      if (active_display = 3) then
+        active_display <= 0;
+        else
+        active_display <= active_display + 1;
+      end if;
+    end if;
+  end process;
+
+  digit_enable <= "1110" when active_display = 0 else
+  "1101" when active_display = 1 else
+  "1011" when active_display = 2 else
+  "0111" when active_display = 3 else
+  "1111";
+
+  data <= decoded_0 when active_display = 0 else
+  decoded_1 when active_display = 1 else
+  decoded_2 when active_display = 2 else
+  decoded_3 when active_display = 3 else
+  (others => '1');
+
 end architecture;
