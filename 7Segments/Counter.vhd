@@ -71,7 +71,7 @@ begin
   LPM_COUNTER_component : LPM_COUNTER
   generic map(
     lpm_direction   => "UNUSED",
-    lpm_modulus     => 11,
+    lpm_modulus     => modulus,
     lpm_port_updown => "PORT_USED",
     lpm_type        => "LPM_COUNTER",
     lpm_width       => 5

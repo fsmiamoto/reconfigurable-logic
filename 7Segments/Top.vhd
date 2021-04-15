@@ -1,6 +1,5 @@
 -- TODO: 
--- - Add other memory
--- - Allow changing speed
+-- Refactor, it's a mess
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -11,6 +10,9 @@ entity Top is
     digit_enable : out std_logic_vector(3 downto 0);
     data         : out std_logic_vector(6 downto 0);
     clk          : in std_logic;
+    left_right   : in std_logic;
+    fast_slow    : in std_logic;
+    word_select  : in std_logic;
     clk_out      : out std_logic
   );
 end Top;
@@ -64,12 +66,15 @@ architecture rtl of Top is
 
   signal active_display : integer range 0 to 3 := 0;
 
-  signal rom_out : std_logic_vector(3 downto 0);
+  signal rom_out  : std_logic_vector(3 downto 0);
+  signal rom_addr : std_logic_vector(4 downto 0);
 
   signal counter_out    : std_logic_vector(4 downto 0);
   signal counter_updown : std_logic;
 
-  signal clock       : std_logic;
+  signal shift_clk   : std_logic;
+  signal shift_fast  : std_logic;
+  signal shift_slow  : std_logic;
   signal display_clk : std_logic;
 begin
   dec0 : Decoder port map(
@@ -90,30 +95,38 @@ begin
   );
 
   mem : ROM port map(
-    address => counter_out,
-    clock   => clock,
+    address => rom_addr,
+    clock   => shift_clk,
     q       => rom_out
   );
 
   cnt : Counter
   generic map(
-    modulus => 11
+    modulus => 12
   )
   port map(
-    clock  => clock,
+    clock  => shift_clk,
     updown => counter_updown,
     q      => counter_out
   );
 
-  div : ClockDivider generic map(
+  div0 : ClockDivider generic map(
     divide_by => 10E6
   )
   port map(
     clk_in  => clk,
-    clk_out => clock
+    clk_out => shift_slow
   );
 
-  div2 : ClockDivider generic map(
+  div1 : ClockDivider generic map(
+    divide_by => 5E6
+  )
+  port map(
+    clk_in  => clk,
+    clk_out => shift_fast
+  );
+
+  div3 : ClockDivider generic map(
     divide_by => 25E2
   )
   port map(
@@ -121,8 +134,10 @@ begin
     clk_out => display_clk
   );
 
-  clk_out        <= clock;
-  counter_updown <= DOWN;
+  clk_out        <= shift_clk;
+  counter_updown <= not left_right;
+  rom_addr       <= counter_out when word_select = '1' else std_logic_vector(unsigned(counter_out) + 12);
+  shift_clk      <= shift_fast when fast_slow = '0' else shift_slow;
 
   process (display_clk)
   begin
@@ -135,9 +150,9 @@ begin
     end if;
   end process;
 
-  process (clock)
+  process (shift_clk)
   begin
-    if (rising_edge(clock)) then
+    if (rising_edge(shift_clk)) then
       if (counter_updown = UP) then
         encoded <= encoded(11 downto 0) & rom_out;
       else
