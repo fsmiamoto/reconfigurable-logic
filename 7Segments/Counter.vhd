@@ -41,9 +41,9 @@ entity Counter is
     modulus : integer := 10
   );
   port (
-    clock : in std_logic;
-    sclr  : in std_logic;
-    q     : out std_logic_vector (4 downto 0)
+    clock  : in std_logic;
+    updown : in std_logic;
+    q      : out std_logic_vector (4 downto 0)
   );
 end Counter;
 architecture SYN of counter is
@@ -53,15 +53,15 @@ architecture SYN of counter is
   component lpm_counter
     generic (
       lpm_direction   : string;
+      lpm_modulus     : natural;
       lpm_port_updown : string;
       lpm_type        : string;
-      lpm_width       : natural;
-      lpm_modulus     : integer
+      lpm_width       : natural
     );
     port (
-      clock : in std_logic;
-      sclr  : in std_logic;
-      q     : out std_logic_vector (4 downto 0)
+      clock  : in std_logic;
+      updown : in std_logic;
+      q      : out std_logic_vector (4 downto 0)
     );
   end component;
 
@@ -70,16 +70,16 @@ begin
 
   LPM_COUNTER_component : LPM_COUNTER
   generic map(
-    lpm_direction   => "UP",
-    lpm_port_updown => "PORT_UNUSED",
+    lpm_direction   => "UNUSED",
+    lpm_modulus     => 11,
+    lpm_port_updown => "PORT_USED",
     lpm_type        => "LPM_COUNTER",
-    lpm_width       => 5,
-    lpm_modulus     => 10
+    lpm_width       => 5
   )
   port map(
-    clock => clock,
-    sclr  => sclr,
-    q     => sub_wire0
+    clock  => clock,
+    updown => updown,
+    q      => sub_wire0
   );
 
 end SYN;
@@ -95,11 +95,11 @@ end SYN;
 -- Retrieval info: PRIVATE: CNT_EN NUMERIC "0"
 -- Retrieval info: PRIVATE: CarryIn NUMERIC "0"
 -- Retrieval info: PRIVATE: CarryOut NUMERIC "0"
--- Retrieval info: PRIVATE: Direction NUMERIC "0"
+-- Retrieval info: PRIVATE: Direction NUMERIC "2"
 -- Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Cyclone IV E"
--- Retrieval info: PRIVATE: ModulusCounter NUMERIC "0"
--- Retrieval info: PRIVATE: ModulusValue NUMERIC "0"
--- Retrieval info: PRIVATE: SCLR NUMERIC "1"
+-- Retrieval info: PRIVATE: ModulusCounter NUMERIC "1"
+-- Retrieval info: PRIVATE: ModulusValue NUMERIC "11"
+-- Retrieval info: PRIVATE: SCLR NUMERIC "0"
 -- Retrieval info: PRIVATE: SLOAD NUMERIC "0"
 -- Retrieval info: PRIVATE: SSET NUMERIC "0"
 -- Retrieval info: PRIVATE: SSET_ALL1 NUMERIC "1"
@@ -107,19 +107,20 @@ end SYN;
 -- Retrieval info: PRIVATE: nBit NUMERIC "5"
 -- Retrieval info: PRIVATE: new_diagram STRING "1"
 -- Retrieval info: LIBRARY: lpm lpm.lpm_components.all
--- Retrieval info: CONSTANT: LPM_DIRECTION STRING "UP"
--- Retrieval info: CONSTANT: LPM_PORT_UPDOWN STRING "PORT_UNUSED"
+-- Retrieval info: CONSTANT: LPM_DIRECTION STRING "UNUSED"
+-- Retrieval info: CONSTANT: LPM_MODULUS NUMERIC "11"
+-- Retrieval info: CONSTANT: LPM_PORT_UPDOWN STRING "PORT_USED"
 -- Retrieval info: CONSTANT: LPM_TYPE STRING "LPM_COUNTER"
 -- Retrieval info: CONSTANT: LPM_WIDTH NUMERIC "5"
 -- Retrieval info: USED_PORT: clock 0 0 0 0 INPUT NODEFVAL "clock"
 -- Retrieval info: USED_PORT: q 0 0 5 0 OUTPUT NODEFVAL "q[4..0]"
--- Retrieval info: USED_PORT: sclr 0 0 0 0 INPUT NODEFVAL "sclr"
+-- Retrieval info: USED_PORT: updown 0 0 0 0 INPUT NODEFVAL "updown"
 -- Retrieval info: CONNECT: @clock 0 0 0 0 clock 0 0 0 0
--- Retrieval info: CONNECT: @sclr 0 0 0 0 sclr 0 0 0 0
+-- Retrieval info: CONNECT: @updown 0 0 0 0 updown 0 0 0 0
 -- Retrieval info: CONNECT: q 0 0 5 0 @q 0 0 5 0
 -- Retrieval info: GEN_FILE: TYPE_NORMAL Counter.vhd TRUE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL Counter.inc FALSE
--- Retrieval info: GEN_FILE: TYPE_NORMAL Counter.cmp FALSE
+-- Retrieval info: GEN_FILE: TYPE_NORMAL Counter.cmp TRUE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL Counter.bsf FALSE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL Counter_inst.vhd FALSE
 -- Retrieval info: LIB_FILE: lpm

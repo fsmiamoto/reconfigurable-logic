@@ -1,3 +1,7 @@
+-- TODO: 
+-- - Add other memory
+-- - Allow changing speed
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -29,14 +33,17 @@ architecture rtl of Top is
 
   component Counter is
     generic (
-      modulus : integer := 10
+      modulus : integer
     );
     port (
-      clock : in std_logic;
-      sclr  : in std_logic;
-      q     : out std_logic_vector (4 downto 0)
+      clock  : in std_logic;
+      updown : in std_logic;
+      q      : out std_logic_vector (4 downto 0)
     );
   end component;
+
+  constant UP   : std_logic := '1';
+  constant DOWN : std_logic := '0';
 
   component ClockDivider is
     generic (
@@ -48,7 +55,7 @@ architecture rtl of Top is
     );
   end component;
 
-  signal encoded : std_logic_vector (15 downto 0);
+  signal encoded : std_logic_vector (15 downto 0) := "1010111011011010";
 
   signal decoded_0 : std_logic_vector(6 downto 0);
   signal decoded_1 : std_logic_vector(6 downto 0);
@@ -57,9 +64,10 @@ architecture rtl of Top is
 
   signal active_display : integer range 0 to 3 := 0;
 
-  signal reset_counter : std_logic := '0';
-  signal rom_out       : std_logic_vector(3 downto 0);
-  signal counter_out   : std_logic_vector(4 downto 0);
+  signal rom_out : std_logic_vector(3 downto 0);
+
+  signal counter_out    : std_logic_vector(4 downto 0);
+  signal counter_updown : std_logic;
 
   signal clock       : std_logic;
   signal display_clk : std_logic;
@@ -92,13 +100,13 @@ begin
     modulus => 11
   )
   port map(
-    clock => clock,
-    sclr  => reset_counter,
-    q     => counter_out
+    clock  => clock,
+    updown => counter_updown,
+    q      => counter_out
   );
 
   div : ClockDivider generic map(
-    divide_by => 25E6
+    divide_by => 10E6
   )
   port map(
     clk_in  => clk,
@@ -113,30 +121,41 @@ begin
     clk_out => display_clk
   );
 
-  clk_out <= clock;
-  encoded <= "1010111011011010";
+  clk_out        <= clock;
+  counter_updown <= DOWN;
 
   process (display_clk)
   begin
     if (rising_edge(display_clk)) then
       if (active_display = 3) then
         active_display <= 0;
-        else
+      else
         active_display <= active_display + 1;
       end if;
     end if;
   end process;
 
+  process (clock)
+  begin
+    if (rising_edge(clock)) then
+      if (counter_updown = UP) then
+        encoded <= encoded(11 downto 0) & rom_out;
+      else
+        encoded <= rom_out & encoded(15 downto 4);
+      end if;
+    end if;
+  end process;
+
   digit_enable <= "1110" when active_display = 0 else
-  "1101" when active_display = 1 else
-  "1011" when active_display = 2 else
-  "0111" when active_display = 3 else
-  "1111";
+    "1101" when active_display = 1 else
+    "1011" when active_display = 2 else
+    "0111" when active_display = 3 else
+    "1111";
 
   data <= decoded_0 when active_display = 0 else
-  decoded_1 when active_display = 1 else
-  decoded_2 when active_display = 2 else
-  decoded_3 when active_display = 3 else
-  (others => '1');
+    decoded_1 when active_display = 1 else
+    decoded_2 when active_display = 2 else
+    decoded_3 when active_display = 3 else
+    (others => '1');
 
 end architecture;
